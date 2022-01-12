@@ -1,5 +1,6 @@
 %specifying input/output impedance, IP3, P1dB in dBm 
 clear all
+EbNo = -2; 
 R = 50; 
 gain = 5; 
 IIP3 =  20;
