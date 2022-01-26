@@ -1,0 +1,26 @@
+clear all 
+clc
+path = 'C:\Users\Martha Ca$h\Desktop\School\Grad School\Research\DVBS2X Simulation\HPA NL Models\BER Plots\'
+filename = 'ber.xls'
+ber = zeros(1,7);
+for backOff = [1, 7, 30]
+    i = 1; %iterate through clmns
+    for EbNo = [-2, 0, 3, 10, 15, 23, 50]
+        if backOff == 1
+            GindB = -1.626571802255640;
+            GoutdB = 3.911826101838731;
+        elseif backOff == 7
+            GindB = -7.626571802255640;
+            GoutdB = 9.911826101838731;
+        else 
+           GindB = -30.626571802255640;
+           GoutdB = 32.911826101838731;
+        end 
+       %run HPA and AWGN Simulations
+       sim('DVB_HPA_AWGN',1);
+       ber(i) = berVec(1); 
+       i = i+1; 
+    end
+    wrtiematrix(ber, [path,filename], 'Sheet', ['backOff', num2str(backOff)]) %write row to excel sheet
+end 
+
